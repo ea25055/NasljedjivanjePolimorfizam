@@ -1,0 +1,108 @@
+
+public abstract class Dostavljac {
+   private String ime;
+   private int brojDostava;
+   private int godinaIskustva;
+   public Dostavljac(String ime, int brojDostava, int godinaIskustva) {
+	super();
+	this.ime = ime;
+	this.brojDostava = brojDostava;
+	this.godinaIskustva = godinaIskustva;
+   }
+   public String getIme() {
+	return ime;
+   }
+   public void setIme(String ime) {
+	this.ime = ime;
+   }
+   public int getBrojDostava() {
+	return brojDostava;
+   }
+   public void setBrojDostava(int brojDostava) {
+	this.brojDostava = brojDostava;
+   }
+   public int getGodinaIskustva() {
+	return godinaIskustva;
+   }
+   public void setGodinaIskustva(int godinaIskustva) {
+	this.godinaIskustva = godinaIskustva;
+   }
+   
+   public abstract double zarada();
+}
+
+public enum Zona {
+CENTAR,
+GRAD,
+PRIGRADSKA;
+}
+
+public class Bicikl extends Dostavljac {
+   private int km;
+   private Zona zona;
+   public Bicikl(String ime, int brojDostava, int godinaIskustva, int km, Zona zona) {
+	super(ime, brojDostava, godinaIskustva);
+	this.km = km;
+	this.zona = zona;
+   }
+   public int getKm() {
+	return km;
+   }
+   public void setKm(int km) {
+	this.km = km;
+   }
+   public Zona getZona() {
+	return zona;
+   }
+   public void setZona(Zona zona) {
+	this.zona = zona;
+   }
+   
+   
+   @Override
+   public double zarada () {
+	   return getBrojDostava() * 2 + km * 0.5;
+   }
+}
+
+public class Automobil extends Dostavljac {
+  private double potrosnja;
+
+  public Automobil(String ime, int brojDostava, int godinaIskustva, double potrosnja) {
+	super(ime, brojDostava, godinaIskustva);
+	this.potrosnja = potrosnja;
+  }
+
+  public double getPotrosnja() {
+	return potrosnja;
+  }
+
+  public void setPotrosnja(double potrosnja) {
+	this.potrosnja = potrosnja;
+  }
+  
+  
+  @Override
+  public double zarada () {
+	  return getBrojDostava() * 3 - potrosnja * 1.5;
+  }
+}
+import java.util.ArrayList;
+
+public class TestDostavljac {
+
+	public static void main(String[] args) {
+		ArrayList<Dostavljac> lista = new ArrayList<>();
+		Bicikl b1 = new Bicikl ("Amer Adrovic", 40, 2, 60, Zona.CENTAR);
+		Automobil a1 = new Automobil ("Lejla Muratovic", 50, 4, 20.0);
+		lista.add(b1);
+		lista.add(a1);
+		
+		
+		for (Dostavljac d:lista) {
+			System.out.println(d.zarada());
+		}
+	}
+
+}
+
