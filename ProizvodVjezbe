@@ -1,0 +1,163 @@
+
+public abstract class Proizvod {
+    private String naziv;
+    private double cijena;
+    private int godinaProizvodnje;
+	public Proizvod(String naziv, double cijena, int godinaProizvodnje) {
+		super();
+		this.naziv = naziv;
+		this.cijena = cijena;
+		this.godinaProizvodnje = godinaProizvodnje;
+	}
+	public String getNaziv() {
+		return naziv;
+	}
+	public void setNaziv(String naziv) {
+		this.naziv = naziv;
+	}
+	public double getCijena() {
+		return cijena;
+	}
+	public void setCijena(double cijena) {
+		this.cijena = cijena;
+	}
+	public int getGodinaProizvodnje() {
+		return godinaProizvodnje;
+	}
+	public void setGodinaProizvodnje(int godinaProizvodnje) {
+		this.godinaProizvodnje = godinaProizvodnje;
+	}
+    
+    public abstract double izracunajCijenu();
+}
+
+public class Telefoni extends Proizvod {
+   private int  brojKamera;
+   private Kategorija kategorija;
+   public Telefoni(String naziv, double cijena, int godinaProizvodnje, int brojKamera, Kategorija kategorija) {
+	super(naziv, cijena, godinaProizvodnje);
+	this.brojKamera = brojKamera;
+	this.kategorija = kategorija;
+   }
+   public int getBrojKamera() {
+	return brojKamera;
+   }
+   public void setBrojKamera(int brojKamera) {
+	this.brojKamera = brojKamera;
+   }
+   public Kategorija getKategorija() {
+	return kategorija;
+   }
+   public void setKategorija(Kategorija kategorija) {
+	this.kategorija = kategorija;
+   }
+   
+   
+   
+   @Override
+   public double izracunajCijenu() {
+	   return getCijena() + brojKamera * 50;
+	    
+	   
+   }
+}
+
+public enum Kategorija {
+   BUDGET,
+   MIDRANGE,
+   PREMIUM;
+}
+
+
+public class LapTopovi extends Proizvod {
+     private int kolicinaRAM;
+
+	 public LapTopovi(String naziv, double cijena, int godinaProizvodnje, int kolicinaRAM) {
+		super(naziv, cijena, godinaProizvodnje);
+		this.kolicinaRAM = kolicinaRAM;
+	 }
+
+	 public int getKolicinaRAM() {
+		 return kolicinaRAM;
+	 }
+
+	 public void setKolicinaRAM(int kolicinaRAM) {
+		 this.kolicinaRAM = kolicinaRAM;
+	 }
+     @Override
+     public double izracunajCijenu() {
+    	 return getCijena() + kolicinaRAM * 20;
+     }
+}
+import java.util.ArrayList;
+
+public class TestKlasa {
+
+	public static void main(String[] args) {
+		
+	  ArrayList <Proizvod>lista = new ArrayList<>();
+	  Telefoni t1 = new Telefoni ("Samsung",800,2025,3,Kategorija.PREMIUM);
+	  LapTopovi l1 = new LapTopovi("Lenovo",700,2024,16);
+	  lista.add(t1);
+	  lista.add(l1);
+	  
+	  
+	  for (Proizvod p:lista) {
+		  System.out.println(p.izracunajCijenu());
+	  }
+	  
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
