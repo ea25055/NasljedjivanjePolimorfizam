@@ -1,0 +1,139 @@
+
+public abstract class Zaposleni {
+      private String ime;
+      private String prezime;
+      private int godinaStaza;
+	  public Zaposleni(String ime, String prezime, int godinaStaza) {
+		super();
+		this.ime = ime;
+		this.prezime = prezime;
+		this.godinaStaza = godinaStaza;
+	  }
+	  public String getIme() {
+		  return ime;
+	  }
+	  public void setIme(String ime) {
+		  this.ime = ime;
+	  }
+	  public String getPrezime() {
+		  return prezime;
+	  }
+	  public void setPrezime(String prezime) {
+		  this.prezime = prezime;
+	  }
+	  public int getGodinaStaza() {
+		  return godinaStaza;
+	  }
+	  public void setGodinaStaza(int godinaStaza) {
+		  this.godinaStaza = godinaStaza;
+	  }
+      
+	  public abstract double obracunajPlatu();
+}
+
+public class Programer extends Zaposleni {
+    private int brojProjekata;
+    private Nivo nivo;
+
+	
+
+	public Programer(String ime, String prezime, int godinaStaza, int brojProjekata, Nivo nivo) {
+		super(ime, prezime, godinaStaza);
+		this.brojProjekata = brojProjekata;
+		this.nivo = nivo;
+	}
+
+	public int getBrojProjekata() {
+		return brojProjekata;
+	}
+
+	public void setBrojProjekata(int brojProjekata) {
+		this.brojProjekata = brojProjekata;
+	}
+
+	public Nivo getNivo() {
+		return nivo;
+	}
+
+	public void setNivo(Nivo nivo) {
+		this.nivo = nivo;
+	}
+    
+    @Override
+    public  double obracunajPlatu() {
+    	return 1000 + brojProjekata * 100;
+    }
+}
+
+public class Menadzer extends Zaposleni {
+    private int brojClanova;
+
+	public Menadzer(String ime, String prezime, int godinaStaza, int brojClanova) {
+		super(ime, prezime, godinaStaza);
+		this.brojClanova = brojClanova;
+	}
+
+	public int getBrojClanova() {
+		return brojClanova;
+	}
+
+	public void setBrojClanova(int brojClanova) {
+		this.brojClanova = brojClanova;
+	}
+    
+  @Override
+  public double obracunajPlatu() {
+	  return 1200 + brojClanova * 50;
+  }
+}
+
+public enum Nivo {
+JUNIOR,
+MEDIOR,
+SENIOR;
+}
+import java.util.ArrayList;
+
+public class TestZaposleni {
+
+
+	
+
+	public static void main(String[] args) {
+		Programer p1 = new Programer( "Emina","Adrovic",3,5,Nivo.JUNIOR);
+		Menadzer m1 = new Menadzer ("Marko","Markovic",10,8);
+             ArrayList<Zaposleni> lista = new ArrayList<>();
+             lista.add(p1);
+             lista.add(m1);
+             
+		for (Zaposleni z:lista) {
+			System.out.println(z.obracunajPlatu());
+		}
+	
+		
+	 //System.out.println(p1.obracunajPlatu());
+	// System.out.println(m1.obracunajPlatu());
+	 
+	 /*Zaposleni z1 = p1;
+	 Zaposleni z2 = m1;
+	 System.out.println(z1.obracunajPlatu());
+	 System.out.println(z2.obracunajPlatu());*/
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
