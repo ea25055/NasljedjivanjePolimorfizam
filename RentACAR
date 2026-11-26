@@ -1,0 +1,160 @@
+
+public abstract class Iznajmljivanje {
+   private String imeiPrezime;
+   private String datum;
+   private int brojDanaIznajmljivanja;
+   public static  double osnovnaCijena = 5.00;
+   public Iznajmljivanje(String imeiPrezime, String datum, int brojDanaIznajmljivanja) {
+	super();
+	this.imeiPrezime = imeiPrezime;
+	this.datum = datum;
+	this.brojDanaIznajmljivanja = brojDanaIznajmljivanja;
+   }
+   public String getImeiPrezime() {
+	return imeiPrezime;
+   }
+   public void setImeiPrezime(String imeiPrezime) {
+	this.imeiPrezime = imeiPrezime;
+   }
+   public String getDatum() {
+	return datum;
+   }
+   public void setDatum(String datum) {
+	this.datum = datum;
+   }
+   public int getBrojDanaIznajmljivanja() {
+	return brojDanaIznajmljivanja;
+   }
+   public void setBrojDanaIznajmljivanja(int brojDanaIznajmljivanja) {
+	this.brojDanaIznajmljivanja = brojDanaIznajmljivanja;
+   }
+   public abstract double IzracunajCijenu();
+}
+
+
+public class Automobill extends Iznajmljivanje {
+     private String marka;
+     private int brojSjedista;
+     private boolean automatskiMjenjac;
+	
+	public Automobill(String imeiPrezime, String datum, int brojDanaIznajmljivanja, String marka, int brojSjedista,
+			boolean automatskiMjenjac) {
+		super(imeiPrezime, datum, brojDanaIznajmljivanja);
+		this.marka = marka;
+		this.brojSjedista = brojSjedista;
+		this.automatskiMjenjac = automatskiMjenjac;
+	}
+
+	public String getMarka() {
+		return marka;
+	}
+
+	public void setMarka(String marka) {
+		this.marka = marka;
+	}
+
+	public int getBrojSjedista() {
+		return brojSjedista;
+	}
+
+	public void setBrojSjedista(int brojSjedista) {
+		this.brojSjedista = brojSjedista;
+	}
+
+	public boolean isAutomatskiMjenjac() {
+		return automatskiMjenjac;
+	}
+
+	public void setAutomatskiMjenjac(boolean automatskiMjenjac) {
+		this.automatskiMjenjac = automatskiMjenjac;
+	}
+
+	@Override
+	public double IzracunajCijenu() {
+		if (automatskiMjenjac == false) {
+		 return getBrojDanaIznajmljivanja() * osnovnaCijena * brojSjedista;
+	} else {
+		return getBrojDanaIznajmljivanja() * osnovnaCijena * brojSjedista * 0.20;
+	}
+	}
+}
+
+
+public class Motocikll extends Iznajmljivanje {
+      private String markaM;
+      private int kubikazaM;
+      private boolean dodatnaOprema;
+	public Motocikll(String imeiPrezime, String datum, int brojDanaIznajmljivanja, String markaM, int kubikazaM,
+			boolean dodatnaOprema) {
+		super(imeiPrezime, datum, brojDanaIznajmljivanja);
+		this.markaM = markaM;
+		this.kubikazaM = kubikazaM;
+		this.dodatnaOprema = dodatnaOprema;
+	}
+
+	public String getMarkaM() {
+		return markaM;
+	}
+
+	public void setMarkaM(String markaM) {
+		this.markaM = markaM;
+	}
+
+	public int getKubikazaM() {
+		return kubikazaM;
+	}
+
+	public void setKubikazaM(int kubikazaM) {
+		this.kubikazaM = kubikazaM;
+	}
+
+	public boolean isDodatnaOprema() {
+		return dodatnaOprema;
+	}
+
+	public void setDodatnaOprema(boolean dodatnaOprema) {
+		this.dodatnaOprema = dodatnaOprema;
+	}
+
+	@Override
+	public double IzracunajCijenu() {
+		if (dodatnaOprema == false) {
+		return getBrojDanaIznajmljivanja() * osnovnaCijena;
+	} else {
+		return getBrojDanaIznajmljivanja() * osnovnaCijena + 50;
+	}
+
+	}
+}
+import java.util.ArrayList;
+
+public class RentaCar {
+      
+	   public static void ispis(ArrayList<Iznajmljivanje>lista){
+		   for (Iznajmljivanje i:lista) {
+			  System.out.println(i.IzracunajCijenu());
+		   }
+	   }
+	
+	
+	
+	public static void main(String[] args) {
+		ArrayList <Iznajmljivanje> lista = new ArrayList<>();
+		Automobill a1 = new Automobill ("Emina Adrovic","22.11.2026.",3,"BMW",5,true);
+		Automobill a2 = new Automobill ("Hana Nisic","25.11.2026.",5, "AUDI",4,false);
+        Motocikll m1 = new Motocikll ("Asim Bajric","24.11.2026.",2,"Honda",300,false);
+        Motocikll m2 = new Motocikll ("Halid Beslic","21.12.2023.",4,"Yamaha",600,true);
+        lista.add(a1);
+        lista.add(a2);
+        lista.add(m1);
+        lista.add(m2);
+     //   ispis(lista);
+    Iznajmljivanje i = lista.get(0);
+    Automobill a = (Automobill) i;
+    System.out.println(a.getMarka());
+        
+	}
+
+}
+
+
